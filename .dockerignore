@@ -1,0 +1,11 @@
+.git
+.gitignore
+build/
+install/
+log/
+__pycache__
+*.pyc
+.vscode/
+.ruff_cache/
+Dockerfile
+.dockerignore
