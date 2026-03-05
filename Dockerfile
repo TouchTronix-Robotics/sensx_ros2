@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tmux ros-${ROS_DISTRO}-rqt-image-view \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install --no-cache-dir --upgrade setuptools && \
+RUN pip3 install --no-cache-dir "setuptools>=64.0,<71" && \
     pip3 install --no-cache-dir \
     git+https://github.com/TouchTronix-Robotics/sensx_python.git \
     numpy
