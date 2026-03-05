@@ -21,6 +21,12 @@ for serial communication.
 | `cols` | `8` | Sensor grid columns |
 | `max_value` | `4095` | Max sensor value for image scaling |
 
+## Serial Permissions (Linux)
+
+```bash
+sudo chmod a+rw /dev/ttyUSB0
+```
+
 ## Native Build
 
 ```bash
@@ -85,10 +91,4 @@ ros2 launch tactile_module sensor_launch.py rows:=5 cols:=5
 
 # Custom port and max value
 ros2 launch tactile_module sensor_launch.py port:=/dev/ttyUSB1 max_value:=2047
-```
-
-## Serial Permissions (Linux)
-
-```bash
-sudo chmod a+rw /dev/ttyUSB0
 ```
