@@ -41,6 +41,7 @@ sudo chmod a+rw /dev/ttyUSB0
 
 ```bash
 # Install sensx
+pip install --upgrade pip setuptools wheel
 pip install git+https://github.com/TouchTronix-Robotics/sensx_python.git
 
 # Build workspace
