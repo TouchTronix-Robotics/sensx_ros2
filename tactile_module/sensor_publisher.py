@@ -53,22 +53,14 @@ class SensorNode(Node):
             self.get_logger().fatal(f"Failed to open sensor: {e}")
             sys.exit(1)
 
+        # Publish every frame from the driver's reader thread
+        self._sensor.on_frame = self._publish
         self._sensor.start()
-        self._last_ts = 0.0
-
-        # 100 Hz timer
-        self._timer = self.create_timer(1.0 / 100.0, self._timer_cb)
 
         self.get_logger().info(f"SensX {rows}x{cols} on {port} @ {baud} baud")
 
-    def _timer_cb(self):
-        ts = self._sensor.latest_timestamp
-        if ts == 0.0 or ts == self._last_ts:
-            return  # no new frame
-        self._last_ts = ts
-
-        frame = self._sensor.latest_frame  # np.uint16, shape (rows, cols)
-
+    def _publish(self, frame, ts):
+        # frame: np.uint16, shape (rows, cols)
         # Publish raw
         msg_raw = UInt16MultiArray(layout=self._layout)
         msg_raw.data = frame.flatten().tolist()
